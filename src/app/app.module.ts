@@ -41,7 +41,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {CdkMenuModule} from '@angular/cdk/menu';
 import { EmployeemanageComponent } from './components/employeemanage/employeemanage.component';
 import { RolemanageComponent } from './components/employeemanage/rolemanage/rolemanage.component';
-import { AddRoleComponent } from './components/employeemanage/rolemanage/add-role/add-role.component'
+import { AddRoleComponent } from './components/employeemanage/rolemanage/add-role/add-role.component';
+import { MenumanageComponent } from './components/menumanage/menumanage.component';
+import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.component'
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { AddRoleComponent } from './components/employeemanage/rolemanage/add-rol
     HeaderComponent,
     EmployeemanageComponent,
     RolemanageComponent,
-    AddRoleComponent
+    AddRoleComponent,
+    MenumanageComponent,
+    AddMenuComponent
   ],
   imports: [
     BrowserModule,

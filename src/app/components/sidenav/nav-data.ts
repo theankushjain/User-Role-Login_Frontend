@@ -5,22 +5,38 @@ export const navbarData = [
         label: 'Dashboard'
     },
     {
-        routeLink: 'register',
+        routeLink: 'employee/manage',
         icon: 'fal fa-user-plus',
-        label: 'Employee Management',
+        label: 'User Management',
         items:[
             {
                 routeLink: 'employee/manage',
-                label: 'List All Employees'
-            },
-            {
-                routeLink: 'register',
-                label: 'Register New Employee'
+                label: 'Employee Management'
             },
             {
                 routeLink:'role/manage',
                 label: 'Role Management'
-            }
+            },
+            {
+                routeLink: 'menu/manage',
+                label: "Menu Management"
+            },
+            {
+                routeLink: 'permission/manage',
+                label:'Assign Permissions to Roles'
+            },
+
+        ]
+    },
+    {
+        routeLink: 'departments/manage',
+        icon:'fal fa-building',
+        label: 'Branch Management',
+        items:[
+            {
+                routeLink:'department/manage',
+                label: 'Branch Management'
+            },
         ]
     },
     {
@@ -57,30 +73,6 @@ export const navbarData = [
                 label: 'Level 1.2',
             }
         ]
-    },
-    {
-        routeLink: 'roleassign',
-        icon: 'fal fa-user-check',
-        label: 'Assign Roles to Users',
-        items:[
-            {
-                routeLink: 'roles/view',
-                label: 'List Roles'
-            },
-            {
-                routeLink: 'roles/create',
-                label: 'Create Role'
-            },
-            {
-                routeLink: 'roles/assign',
-                label: 'Assign Role'
-            }
-        ]
-    },
-    {
-        routeLink: 'rolepermissions',
-        icon: 'fal fa-lock-open',
-        label: 'Assign Permissions to Roles'
     },
     {
         routeLink: 'transfer',

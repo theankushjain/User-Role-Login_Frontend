@@ -1,7 +1,8 @@
 <div class="bootstrap-wrapper">
     <div class="container mt">
         <div class="col-md-6 offset-md-3">
-            <h1 class="text-center">Register New User Here!!!</h1>
+            <h1 *ngIf="!data" class="text-center">Register New User Here!!!</h1>
+            <h1 *ngIf="data" class="text-center">Edit Existing User Here!!!</h1>
 
             <!-- display feedback -->
             <!-- <div *ngIf="feedback.error" class="container text-center" style="color: red;">{{feedback.error}}</div>
@@ -37,7 +38,7 @@
                             </div>
                         </mat-form-field>
                     </div>
-                    <div class="row">
+                    <div *ngIf="!data" class="row">
                         <mat-form-field  class="full-width" appearance="outline">
                             <mat-label for="password">Password</mat-label>
                             <input formControlName="password" type="password" required matInput>

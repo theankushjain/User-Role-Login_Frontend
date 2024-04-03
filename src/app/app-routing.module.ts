@@ -7,6 +7,8 @@ import { authGuard } from './services/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { EmployeemanageComponent } from './components/employeemanage/employeemanage.component';
 import { RolemanageComponent } from './components/employeemanage/rolemanage/rolemanage.component';
+import { MenumanageComponent } from './components/menumanage/menumanage.component';
+import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,12 @@ const routes: Routes = [
     pathMatch:'full',
     canActivate: [authGuard]
   },
+  {
+    path:'menu/manage',
+    component:MenumanageComponent,
+    pathMatch:'full',
+    canActivate:[authGuard]
+  }
 
 
 ];
