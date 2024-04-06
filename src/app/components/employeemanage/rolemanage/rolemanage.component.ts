@@ -85,17 +85,17 @@ export class RolemanageComponent implements OnInit, AfterViewInit {
       (response: any) => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
       (error) => {
         console.log(error);
       }
     );
-    console.log(this.dataSource);
+
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator,
-    this.dataSource.sort = this.sort;
+  
   }
 
   applyFilter(event: Event) {

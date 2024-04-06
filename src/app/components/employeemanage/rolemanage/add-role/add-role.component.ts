@@ -28,7 +28,6 @@ export class AddRoleComponent implements OnInit{
 
   onSubmit() {
 
-    console.log(this.addRoleForm.value);
     if (this.addRoleForm.invalid) {
       return;
     }
@@ -36,6 +35,7 @@ export class AddRoleComponent implements OnInit{
     if (this.data) {
       this.rolesService.updateRole(this.data.id,this.addRoleForm.value).subscribe({
         next: (response: any) => {
+          console.log(response)
           alert("Role Updated Successfully");
           this.resetForm();
           location.reload();
@@ -50,7 +50,7 @@ export class AddRoleComponent implements OnInit{
       this.rolesService.addNewRole(this.addRoleForm.value).subscribe({
         next: (response: any) => {
           console.log("Role Added Successfully", response)
-          alert("Role Added Successfully");
+          alert("Role " + response.name + " Added Successfully");
           this.resetForm();
         },
         error: (error) => {

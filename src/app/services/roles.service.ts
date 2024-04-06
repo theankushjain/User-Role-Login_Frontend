@@ -28,7 +28,6 @@ export class RolesService {
   }
 
   addNewRole(roleDetails:any){
-    console.log('roleDetails sent:', roleDetails)
     return this.http.post(`${this.serverUrl}/auth/roles/add`,roleDetails)
   }
 }

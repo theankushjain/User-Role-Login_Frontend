@@ -35,10 +35,10 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     private usersService: UsersService,
     private exportService: ExportService
     // private _coreService: CoreService
-  ) { }
+  ) { this.getUsers(); }
 
   ngOnInit(): void {
-    this.getUsers();
+    
   }
 
   exportToExcel(): void {
@@ -65,7 +65,7 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
   deleteEmployee(id: number) {
     this.usersService.deleteUser(id).subscribe({
       next: (response: any) => {
-        alert(response);
+        alert("User "+response.name+" deleted successfully.");
         location.reload();
       },
       error: (error) => {
@@ -79,7 +79,9 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     this.usersService.getUser().subscribe(
       (response: any) => {
         this.dataSource = new MatTableDataSource(response);
+        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = this.customFilterPredicate;
       },
       (error) => {
         console.log(error);
@@ -88,8 +90,16 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    
+  }
+
+  customFilterPredicate(data: any, filter: string): boolean {
+    const searchString = filter.toLowerCase();
+    return (
+      data.name.toLowerCase().includes(searchString) ||
+      data.email.toLowerCase().includes(searchString) ||
+      JSON.stringify(data.roles.map((role: { name: string }) => role.name.toLowerCase())).includes(searchString)
+    );
   }
 
   applyFilter(event: Event) {
@@ -100,10 +110,10 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
 
-    // Custom filter for the 'role' column that maps roles and converts it to string
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const roles = JSON.stringify(data.roles.map((role: { name: string; }) => role.name.toLowerCase()));
-      return roles.includes(filter);
-    };
+    // // Custom filter for the 'role' column that maps roles and converts it to string
+    // this.dataSource.filterPredicate = (data: any, filter: string) => {
+    //   const roles = JSON.stringify(data.roles.map((role: { name: string; }) => role.name.toLowerCase()));
+    //   return roles.includes(filter);
+    // };
   }
 }

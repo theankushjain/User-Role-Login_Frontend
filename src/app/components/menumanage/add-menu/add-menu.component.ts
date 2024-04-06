@@ -28,7 +28,7 @@ export class AddMenuComponent implements OnInit {
     });
     this.getMenus();
 
-    const menusData = this.data.menus || [];
+    const menusData = this.data?.menus || [];
 
     // Map the roles array to an array of role names (strings)
     const menuNames = menusData.map((menu: { label: any; }) => menu.label)
@@ -42,8 +42,6 @@ export class AddMenuComponent implements OnInit {
   get f() { return this.addMenuForm.controls; }
 
   onSubmit() {
-    console.log("inside onSubmit")
-    console.log(this.addMenuForm.value);
     if (this.addMenuForm.invalid) {
       console.log("Invalid Form Data");
       return;
@@ -90,7 +88,6 @@ export class AddMenuComponent implements OnInit {
     this.menuService.getMenus().subscribe(
       (response: any) => {
         this.dataSource = response;
-        console.log(this.dataSource)
       },
       (error) => {
         console.log(error);

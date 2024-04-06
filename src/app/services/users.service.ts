@@ -16,7 +16,6 @@ export class UsersService {
   }
 
   updateUser(userId:number,userData:any){
-    console.log("User Edit data from updateUser service:", userData)
     return this.http.put(`${this.serverUrl}/auth/users/${userId}`, userData);
   }
 

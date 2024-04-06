@@ -35,7 +35,6 @@ export class MenumanageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getMenus();
-    console.log("inside init")
   }
 
   exportToExcel(): void {
@@ -69,11 +68,7 @@ export class MenumanageComponent implements OnInit, AfterViewInit {
   deleteMenu(id:number){
     this.menuService.deleteMenu(id).subscribe({
       next: (response: any) => {
-        if(response!=0){
-          alert("Deleted Successfully");
-        }else{
-          alert("Couldn't be deleted")
-        }
+        alert("Menu "+response.label+" deleted successfully.")
         location.reload();
       },
       error: (error) => {
@@ -86,18 +81,16 @@ export class MenumanageComponent implements OnInit, AfterViewInit {
     this.menuService.getMenus().subscribe(
       (response: any) => {
         this.dataSource = new MatTableDataSource(response);
+        this.dataSource.paginator = this.paginator,
         this.dataSource.sort = this.sort;
       },
       (error) => {
         console.log(error);
       }
     );
-    console.log(this.dataSource);
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator,
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

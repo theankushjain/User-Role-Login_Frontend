@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.getRoles();
 
-    const rolesData = this.data.roles || [];
+    const rolesData = this.data?.roles || [];
 
     // Map the roles array to an array of role names (strings)
     const roleNames = rolesData.map((role: { name: any; }) => role.name)
@@ -92,7 +92,6 @@ export class RegisterComponent implements OnInit {
     this.rolesService.getRoles().subscribe(
       (response: any) => {
         this.dataSource = response;
-        console.log(this.dataSource)
       },
       (error) => {
         console.log(error);

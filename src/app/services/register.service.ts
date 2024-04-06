@@ -13,7 +13,6 @@ export class RegisterService {
 
   //calling the server to save new user
   saveCredentials(credentials:any){
-    console.log("User Details sent using saveCreadentials service:", credentials)
     return this.http.post(`${this.serverUrl}/auth/users/add`,credentials)
   }
 

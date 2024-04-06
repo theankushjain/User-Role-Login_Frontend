@@ -16,8 +16,6 @@ export class AuthInterceptor implements HttpInterceptor{
 
         let token= this.LoginService.getToken();
 
-        console.log("INTERCEPTOR ", token);
-
         if(token!=null){
             newReq=newReq.clone({setHeaders:{'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:8080','Authorization':`Bearer ${token}`}})

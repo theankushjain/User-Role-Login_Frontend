@@ -26,12 +26,12 @@
                     <div class="row">
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label for="icon">Icon</mat-label>
-                            <input id="icon" formControlName="icon" type="text" required matInput>
+                            <input id="icon" formControlName="icon" type="text" matInput>
                             <div *ngIf="f.icon.invalid && (f.icon.dirty || f.icon.touched)" class="text-danger">
-                                <div *ngIf="f.icon.errors?.required" style="color: red;"><em>Parent of Menu is required.</em>
+                                <div *ngIf="f.icon.errors?.required" style="color: red;"><em>Icon of Menu is required.</em>
                                 </div>
                                 <!-- ?signifies safe navigation operator as the error might be null -->
-                                <div *ngIf="f.icon.errors?.minlength" style="color: red;"><em>Parent of Menu must be at least 3 characters.</em></div>
+                                <div *ngIf="f.icon.errors?.minlength" style="color: red;"><em>Icon of Menu must be at least 3 characters.</em></div>
                             </div>
                         </mat-form-field>
                     </div>
@@ -50,10 +50,10 @@
                             <mat-label for="ordering">Order</mat-label>
                             <input id="ordering" formControlName="ordering" type="text" required matInput>
                             <div *ngIf="f.ordering.invalid && (f.ordering.dirty || f.ordering.touched)" class="text-danger">
-                                <div *ngIf="f.ordering.errors?.required" style="color: red;"><em>Name of Menu is required.</em>
+                                <div *ngIf="f.ordering.errors?.required" style="color: red;"><em>Order is required.</em>
                                 </div>
                                 <!-- ?signifies safe navigation operator as the error might be null -->
-                                <div *ngIf="f.ordering.errors?.minlength" style="color: red;"><em>Name of Menu must be at least 3 characters.</em></div>
+                                <div *ngIf="f.ordering.errors?.minlength" style="color: red;"><em>Order must be at least 3 characters.</em></div>
                             </div>
                         </mat-form-field>
                     </div>
@@ -62,10 +62,10 @@
                             <mat-label for="route">Route Link</mat-label>
                             <input id="route" formControlName="routeLink" type="text" required matInput>
                             <div *ngIf="f.routeLink.invalid && (f.routeLink.dirty || f.routeLink.touched)" class="text-danger">
-                                <div *ngIf="f.routeLink.errors?.required" style="color: red;"><em>Name of Menu is required.</em>
+                                <div *ngIf="f.routeLink.errors?.required" style="color: red;"><em>Name of routeLink is required.</em>
                                 </div>
                                 <!-- ?signifies safe navigation operator as the error might be null -->
-                                <div *ngIf="f.routeLink.errors?.minlength" style="color: red;"><em>Name of Menu must be at least 3 characters.</em></div>
+                                <div *ngIf="f.routeLink.errors?.minlength" style="color: red;"><em>Name of routelink must be at least 3 characters.</em></div>
                             </div>
                         </mat-form-field>
                     </div>

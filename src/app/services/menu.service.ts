@@ -22,12 +22,7 @@ export class MenuService {
     return this.http.put(`${this.serverUrl}/menus/${menuId}`, menuData);
   }
 
-  getRolesOfUser(){
-    return this.http.get(`${this.serverUrl}/auth/getRolesOfUser`)
-  }
-
   addNewMenu(menuDetails:any){
-    console.log('menuDetails sent:', menuDetails)
     return this.http.post(`${this.serverUrl}/menus/add`,menuDetails)
   }
 } 
