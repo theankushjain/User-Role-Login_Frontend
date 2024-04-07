@@ -11,6 +11,7 @@ import { MenuService } from 'src/app/services/menu.service';
 export class AddMenuComponent implements OnInit {
   addMenuForm: FormGroup;
   dataSource!: [];
+  parentMenus!:[];
 
   constructor(private fb: FormBuilder, private menuService: MenuService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.addMenuForm = this.fb.group({
@@ -66,6 +67,7 @@ export class AddMenuComponent implements OnInit {
           console.log("Menu Added Successfully", response)
           alert("Menu Added Successfully");
           this.resetForm();
+          location.reload();
         },
         error: (error) => {
           console.error('Error during Adding Menu:', error);
@@ -88,6 +90,7 @@ export class AddMenuComponent implements OnInit {
     this.menuService.getMenus().subscribe(
       (response: any) => {
         this.dataSource = response;
+        this.parentMenus = response.filter((menu: { parentMenu: null; })=>menu.parentMenu===null)
       },
       (error) => {
         console.log(error);

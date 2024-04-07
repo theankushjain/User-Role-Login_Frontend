@@ -39,7 +39,7 @@
                         <mat-form-field  class="full-width" appearance="outline">
                             <mat-label for="parent">Parent Menu</mat-label>
                             <mat-select id="parent" matInput formControlName="parentMenu">
-                                <mat-option *ngFor="let menu of dataSource" [value]="menu">
+                                <mat-option *ngFor="let menu of parentMenus" [value]="menu">
                                   {{menu['label']}}
                                 </mat-option>
                               </mat-select>

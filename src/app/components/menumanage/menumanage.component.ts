@@ -80,6 +80,7 @@ export class MenumanageComponent implements OnInit, AfterViewInit {
   getMenus() {
     this.menuService.getMenus().subscribe(
       (response: any) => {
+        console.log(response);
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator,
         this.dataSource.sort = this.sort;

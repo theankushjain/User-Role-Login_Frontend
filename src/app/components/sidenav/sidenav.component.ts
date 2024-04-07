@@ -3,10 +3,18 @@ import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/
 import { Router } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
 import { navbarData } from './nav-data';
+import { MenuService } from 'src/app/services/menu.service';
 
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
+}
+
+interface NavbarItem {
+  routeLink: string;
+  icon: string;
+  label: string;
+  items?: NavbarItem[];
 }
 
 @Component({
@@ -27,6 +35,7 @@ interface SideNavToggle {
     ])
   ]
 })
+
 export class SidenavComponent implements OnInit {
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
@@ -34,6 +43,7 @@ export class SidenavComponent implements OnInit {
   screenWidth = 0;
   navData = navbarData;
   multiple: boolean = false;
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -44,10 +54,11 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private menuService: MenuService) {}
 
   ngOnInit(): void {
       this.screenWidth = window.innerWidth;
+      this.getMenus();
   }
 
   toggleCollapse(): void {
@@ -69,6 +80,19 @@ export class SidenavComponent implements OnInit {
     return this.router.url.includes(data.routeLink) ? 'active' : '';
   }
 
+  getMenus() {
+    this.menuService.getMenus().subscribe(
+      (response: any) => {
+        navbarData.length = 0;
+        navbarData.push(...this.transformApiData(response));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
   shrinkItems(item: INavbarData): void {
     if (!this.multiple) {
       for(let modelItem of this.navData) {
@@ -78,4 +102,42 @@ export class SidenavComponent implements OnInit {
       }
     }
   }
+
+  
+ transformApiData(apiData: any[]): NavbarItem[] {
+  const transformedData: NavbarItem[] = [];
+  const topLevelItems = apiData.filter((item) => !item.parentMenu);
+
+  topLevelItems.forEach((item) => {
+    const topLevelItem: NavbarItem = {
+      routeLink: item.routeLink,
+      icon: item.icon,
+      label: item.label,
+      items: [],
+    };
+
+    const childItems = apiData.filter((child) => child.parentMenu?.id === item.id);
+    if (childItems.length > 0) {
+      topLevelItem.items = this.transformApiData(childItems);
+    }
+
+    transformedData.push(topLevelItem);
+  });
+
+  const remainingItems = apiData.filter((item) => item.parentMenu);
+  remainingItems.forEach((item) => {
+    const parentItem = transformedData.find((i) => i.label === item.parentMenu?.label);
+    if (parentItem) {
+      parentItem.items?.push({
+        routeLink: item.routeLink,
+        icon: item.icon,
+        label: item.label,
+        items: [],
+      });
+    }
+  });
+  return transformedData;
+ }
+
+  
 }
